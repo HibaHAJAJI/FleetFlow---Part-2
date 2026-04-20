@@ -24,6 +24,6 @@ public class Client {
     @ToString.Exclude
     private List<Livraison>livraisons;
 
-    public Client(String sara, String mail, String casa, String number) {
+    public Client(Long id,String sara, String mail, String casa, String number) {
     }
 }

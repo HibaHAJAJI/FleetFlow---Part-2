@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -31,16 +32,16 @@ public class ClientServiceTest {
     @Test
     public void saveClient(){
 
-       ClientDto dto =new ClientDto(2L,"sara","sara@gamil.com","CASA","23456789");
-       Client client=new Client("sara","sara@email.com","casa","09987755");
-       ClientDto saveDto =new ClientDto(2L,"sara","sara@email.com","casa","09987755");
-
+       ClientDto dto =new ClientDto(2L,"Hiba","Hiba@gamil.com","CASA","0634567890");
+       Client client=new Client(2L,"Hiba","Hiba@gamil.com","CASA","0634567890");
+       ClientDto saveDto =new ClientDto(2L,"Hiba","Hiba@gamil.com","CASA","0634567890");
        when(clientMapper.toEntity(dto)).thenReturn(client);
        when(clientRepository.save(client)).thenReturn(client);
        when(clientMapper.toDto(client)).thenReturn(saveDto);
+
        ClientDto result= clientService.addClient(dto);
        assertNotNull(result);
-
+       assertThat(result.getName()).isEqualTo("Hiba");
    }
 
    @Test

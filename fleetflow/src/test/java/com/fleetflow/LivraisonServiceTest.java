@@ -2,6 +2,7 @@ package com.fleetflow;
 
 import com.fleetflow.Dto.LivraisonDTO;
 import com.fleetflow.Entity.*;
+import com.fleetflow.Service.LivraisonService;
 import com.fleetflow.enums.StatutLivraison;
 import com.fleetflow.enums.StatutVehicule;
 import com.fleetflow.Mapper.LivraisonMapper;
@@ -113,11 +114,12 @@ class LivraisonServiceTest {
     @DisplayName("Modifier le statut d'une livraison")
     void modifierStatutLivraison() {
         // Arrange
-        Livraison livraison = Livraison.builder().id(1L).statut(StatutLivraison.ENATTENTE).build();
-        LivraisonDTO dto = LivraisonDTO.builder()
-                .id(1L)
-                .statut(StatutLivraison.ENCOURS)
-                .build();
+        Livraison livraison = new Livraison();
+        livraison.setId(1L);
+        livraison.setStatut(StatutLivraison.ENATTENTE);
+        LivraisonDTO dto = new LivraisonDTO();
+        dto.setId(1L);
+        dto.setStatut(StatutLivraison.ENCOURS);
 
         when(livraisonRepository.findById(1L)).thenReturn(Optional.of(livraison));
         when(livraisonRepository.save(any(Livraison.class))).thenReturn(livraison);
