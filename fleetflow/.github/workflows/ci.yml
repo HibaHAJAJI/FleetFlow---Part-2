@@ -21,7 +21,6 @@ jobs:
           cache: 'maven'
 
       - name: Compile and Test
-        working-directory: fleetflow
         run: mvn clean verify
 
       - name: Save JAR
@@ -29,4 +28,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: fleetflow-executable
-          path: fleetflow/target/*.jar
+          path: target/*.jar
