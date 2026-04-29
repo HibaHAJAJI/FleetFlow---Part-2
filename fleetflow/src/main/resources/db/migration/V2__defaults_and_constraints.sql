@@ -1,21 +1,23 @@
 ALTER TABLE livraison
     ADD CONSTRAINT fk_livraison_client
-        FOREIGN KEY (client_id) REFERENCES client(id),
+        FOREIGN KEY (client_id) REFERENCES client(id);
 
+ALTER TABLE livraison
     ADD CONSTRAINT fk_livraison_chauffeur
-        FOREIGN KEY (chauffeur_id) REFERENCES chauffeur(id),
+        FOREIGN KEY (chauffeur_id) REFERENCES chauffeur(id);
 
+ALTER TABLE livraison
     ADD CONSTRAINT fk_livraison_vehicule
         FOREIGN KEY (vehicule_id) REFERENCES vehicule(id);
 
 ALTER TABLE vehicule
-    MODIFY statut VARCHAR(30) NOT NULL DEFAULT 'DISPONIBLE';
+    ALTER COLUMN statut SET DEFAULT 'DISPONIBLE';
 
 ALTER TABLE chauffeur
-    MODIFY disponible BOOLEAN NOT NULL DEFAULT TRUE;
+    ALTER COLUMN disponible SET DEFAULT TRUE;
 
 ALTER TABLE livraison
-    MODIFY statut VARCHAR(30) NOT NULL DEFAULT 'ENATTENTE';
+    ALTER COLUMN statut SET DEFAULT 'ENATTENTE';
 
 ALTER TABLE vehicule
     ADD CONSTRAINT chk_capacite_positive CHECK (capacite > 0);

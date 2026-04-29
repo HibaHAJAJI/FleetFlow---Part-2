@@ -40,7 +40,7 @@ public class VehiculeService {
            return mapper.toDto(repos.save(vehicule));
     }
 
-    public List<VehiculeDto>getVehiculesDisponible(StatutVehicule status){
+    public List<VehiculeDto>getVehiculesDisponible(){
         List<Vehicule>vehicules=repos.findByStatut(StatutVehicule.DISPONIBLE);
         return mapper.toDto(vehicules);
     }

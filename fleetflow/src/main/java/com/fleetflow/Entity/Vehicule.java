@@ -17,10 +17,14 @@ public class Vehicule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String matricule;
+    @Column(nullable = false)
     private String type;
-    private Double capacite;
+    @Column(nullable = false)
+    private Integer capacite;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatutVehicule statut;
 
     @OneToMany(mappedBy = "vehicule",cascade = CascadeType.ALL)

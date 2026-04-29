@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "livraisons")
+@Table(name = "livraison")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,13 +18,17 @@ public class Livraison {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private LocalDate dateLivraison;
 
+    @Column(nullable = false)
     private String adresseDepart;
 
+    @Column(nullable = false)
     private String adresseDestination;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatutLivraison statut;
 
     @ManyToOne

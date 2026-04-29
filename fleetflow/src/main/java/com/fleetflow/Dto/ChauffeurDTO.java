@@ -12,7 +12,9 @@ public class ChauffeurDTO {
 
     @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+    @NotBlank(message = "Le telephone est obligatoire")
     private String telephone;
+    @NotBlank(message = "Le permis est obligatoire")
     private String permisType;
     private Boolean disponible;
 }

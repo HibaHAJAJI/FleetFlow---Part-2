@@ -13,7 +13,7 @@ public class VehiculeDto {
     @NotBlank(message = "Le type est obligatoire")
     private String type;
     @NotNull(message = "La capacite est obligatoire")
-    private Double capacite;
+    private Integer capacite;
     @NotNull(message = "Le statut est obligatoire")
     private StatutVehicule statut;
 }

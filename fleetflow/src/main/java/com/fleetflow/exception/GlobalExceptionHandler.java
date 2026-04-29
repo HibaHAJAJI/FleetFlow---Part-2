@@ -1,3 +1,32 @@
+//package com.fleetflow.exception;
+//
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.validation.FieldError;
+//import org.springframework.web.bind.MethodArgumentNotValidException;
+//import org.springframework.web.bind.annotation.ExceptionHandler;
+//import org.springframework.web.bind.annotation.RestControllerAdvice;
+//
+//import java.util.HashMap;
+//import java.util.Map;
+//
+//@RestControllerAdvice
+//public class GlobalExceptionHandler {
+//
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<Map<String, String>> handleValidationErrors(
+//            MethodArgumentNotValidException ex) {
+//
+//        Map<String, String> erreurs = new HashMap<>();
+//
+//        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+//            erreurs.put(error.getField(), error.getDefaultMessage());
+//        }
+//
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erreurs);
+//    }
+//}
+
 package com.fleetflow.exception;
 
 import org.springframework.http.HttpStatus;
@@ -17,12 +46,22 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
 
-        Map<String, String> erreurs = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
 
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            erreurs.put(error.getField(), error.getDefaultMessage());
+            errors.put(error.getField(), error.getDefaultMessage());
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erreurs);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, String>> handleRuntimeException(
+            RuntimeException ex) {
+
+        Map<String, String> error = new HashMap<>();
+        error.put("erreur", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 }

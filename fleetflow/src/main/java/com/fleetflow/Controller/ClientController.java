@@ -2,6 +2,9 @@ package com.fleetflow.Controller;
 
 import com.fleetflow.Dto.ClientDto;
 import com.fleetflow.Service.ClientService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,13 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Trouver un client par ID")
+    public ResponseEntity<ClientDto> getClientById(@PathVariable Long id) {
+        return ResponseEntity.ok(clientService.getClientById(id));
+    }
+
     @GetMapping("/afficher")
     public List<ClientDto> afficherTousClients(){
         return clientService.getAllClient();
@@ -24,7 +34,7 @@ public class ClientController {
         return clientService.addClient(dto);
     }
     @PutMapping("/modifier/{id}")
-    public ClientDto modifierClient(@PathVariable Long id,@RequestBody ClientDto dto){
+    public ClientDto modifierClient(@PathVariable Long id, @Valid  @RequestBody ClientDto dto){
         return clientService.updateClient(id,dto);
     }
     @DeleteMapping("/supprimer/{id}")

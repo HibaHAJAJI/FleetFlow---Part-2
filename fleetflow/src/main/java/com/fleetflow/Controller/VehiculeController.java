@@ -4,6 +4,7 @@ package com.fleetflow.Controller;
 import com.fleetflow.Dto.VehiculeDto;
 import com.fleetflow.Service.VehiculeService;
 import com.fleetflow.enums.StatutVehicule;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +21,15 @@ public class VehiculeController {
 
     @GetMapping("/disponibles")
     public ResponseEntity< List<VehiculeDto>> afficherVehiculDisponible(){
-        List<VehiculeDto>disponibles=vehiculeService.getVehiculesDisponible(StatutVehicule.DISPONIBLE);
+        List<VehiculeDto>disponibles=vehiculeService.getVehiculesDisponible();
         return ResponseEntity.ok(disponibles);
     }
     @PostMapping("/ajouter")
-    public VehiculeDto ajouterVehicule(@RequestBody VehiculeDto dto){
+    public VehiculeDto ajouterVehicule(@Valid @RequestBody VehiculeDto dto){
         return vehiculeService.addVehicule(dto);
     }
     @PutMapping("/modifier/{id}")
-    public VehiculeDto modifierVehicule(@PathVariable Long id,@RequestBody VehiculeDto dto){
+    public VehiculeDto modifierVehicule(@PathVariable Long id,@Valid @RequestBody VehiculeDto dto){
         return vehiculeService.updateVehicule(id,dto);
     }
     @DeleteMapping("/supprimer/{id}")

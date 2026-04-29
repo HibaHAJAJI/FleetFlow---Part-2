@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "chauffeurs")
+@Table(name = "chauffeur")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +18,10 @@ public class Chauffeur {
     @Column(nullable = false)
     private String nom;
 
+    @Column(nullable = false)
     private String telephone;
 
+    @Column(name = "permisType", nullable = false)
     private String permisType;
 
     private Boolean disponible;
